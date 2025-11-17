@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../models/product_model.dart';
-import '../providers/product_provider.dart';
+import '../models/cart_model.dart';
+import '../providers/cart_provider.dart';
 
 class CartItem extends StatelessWidget {
-  Product item;
-  CartItem({required this.item, super.key});
+  CartItemModel item;
+  int userId;
+  CartItem({required this.item,required this.userId ,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,34 +16,19 @@ class CartItem extends StatelessWidget {
       margin: EdgeInsets.all(10),
       elevation: 10,
       child: ListTile(
-        leading: Icon(item.icon, size: 40, color: Colors.teal),
+        leading: Image.network(
+          item.image,
+          errorBuilder: (context, error, stackTrace) =>
+              Icon(Icons.shopping_bag_outlined, color: Colors.teal),
+        ),
         title: Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text("Price: \$${item.price}"),
 
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(Icons.remove),
-              onPressed: () {
-                context.read<ProductProvider>().decreseItems(item);
-              },
-            ),
-
-            Consumer<ProductProvider>(
-              builder: (context, value, child) => Text(
-                "${item.quantity}",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                context.read<ProductProvider>().increaseItem(item);
-              },
-            ),
-          ],
+        trailing:  IconButton(
+          icon: Icon(Icons.delete_outline, color: Colors.red),
+          onPressed: () {
+            context.read<CartProvider>().removeProductFromCart(userId: userId, productId: item.id);
+          },
         ),
       ),
     );

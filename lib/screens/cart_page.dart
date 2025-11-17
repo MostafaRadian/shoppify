@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/cart_model.dart';
-import '../models/product_model.dart';
 import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
-import '../providers/product_provider.dart';
 import '../widgets/cart_item.dart';
 
 class CartPage extends StatelessWidget {
@@ -49,7 +47,7 @@ class CartPage extends StatelessWidget {
                       itemCount: cartList.length,
                       itemBuilder: (context, index) {
                         CartItemModel item = cartList[index];
-                        return CartItem(item: item);
+                        return CartItem(item: item, userId: userId,);
                       },
                     );
                   }
@@ -64,10 +62,6 @@ class CartPage extends StatelessWidget {
                 child: Consumer<CartProvider>(
                   builder: (context, value, child) {
                     final total = value.cartModel?.totalPrice;
-
-                    if (total == 0) {
-                      return CircularProgressIndicator();
-                    }
                     return Text(
                       "Total: \$$total",
                       style: TextStyle(

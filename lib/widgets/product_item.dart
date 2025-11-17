@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/product_model.dart';
-import '../providers/product_provider.dart';
+import '../providers/cart_provider.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product item;
-  const ProductItem({required this.item, super.key});
+  final ProductModel item;
+  final int userId;
+  const ProductItem({required this.item,required this.userId ,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +16,22 @@ class ProductItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(item.icon, size: 70, color: Colors.teal),
+        Image.network(
+        item.image,
+        errorBuilder: (context, error, stackTrace) =>
+            Icon(Icons.shopping_bag_outlined, color: Colors.teal),
+      ),
           Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
           Text("\$${item.price}"),
           const SizedBox(height: 8),
 
-          Consumer<ProductProvider>(
+          Consumer<CartProvider>(
             builder: (context, value, child) => ElevatedButton(
               onPressed: () {
                 if (item.added) {
-                  value.removeFromCart(item);
+                  value.removeProductFromCart(userId:userId , productId: item.id);
                 } else {
-                  value.addToCart(item);
+                  value.addProductToCart(userId:userId , productId: item.id);
                 }
               },
               style: ElevatedButton.styleFrom(
