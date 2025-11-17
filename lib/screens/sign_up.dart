@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shoppify/screens/login.dart';
 
 import '../providers/auth_provider.dart';
 import '../widgets/custom_text_field.dart';
@@ -118,7 +119,7 @@ class SignUp extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Placeholder(),
+                            builder: (context) => LoginPage(),
                           ),
                         );
                       } else {

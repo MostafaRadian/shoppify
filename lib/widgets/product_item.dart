@@ -6,9 +6,9 @@ import '../models/product_model.dart';
 import '../providers/cart_provider.dart';
 
 class ProductItem extends StatelessWidget {
-  final ProductModel item;
+  ProductModel item;
   final int userId;
-  const ProductItem({required this.item,required this.userId ,super.key});
+  ProductItem({required this.item,required this.userId ,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,9 @@ class ProductItem extends StatelessWidget {
               onPressed: () {
                 if (item.added) {
                   value.removeProductFromCart(userId:userId , productId: item.id);
+                  item.added = false;
                 } else {
+                  item.added = true;
                   value.addProductToCart(userId:userId , productId: item.id);
                 }
               },
