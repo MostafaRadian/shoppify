@@ -23,7 +23,7 @@ class CartModel {
       return CartItemModel(
         id: item["id"],
         name: item["name"],
-        image: item["image"],
+        image: item["imagePath"],
         price: item["price"],
       );
     }).toList();

@@ -10,7 +10,7 @@ class AuthService {
   }) async {
     try {
       Response response = await dio.post(
-        "https://ecommerceflutter.runasp.net/api/Customer/login",
+        "https://ecommerceflutter2.runasp.net/api/Customer/login",
         data: {"email": email, "password": password},
       );
       return UserModel.fromJson(json: response.data);
@@ -29,7 +29,7 @@ class AuthService {
   }) async {
     try {
       Response response = await dio.post(
-        "https://ecommerceflutter.runasp.net/api/Customer/signup",
+        "https://ecommerceflutter2.runasp.net/api/Customer/signup",
         data: {
           "email": email,
           "password": password,

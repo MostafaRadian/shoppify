@@ -29,7 +29,7 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
           border: const OutlineInputBorder(),
-          suffixIcon: Icon(icon),
+          suffixIcon: Icon(icon, color: Colors.teal),
         ),
       ),
     );

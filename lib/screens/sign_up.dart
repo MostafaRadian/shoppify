@@ -30,7 +30,7 @@ class SignUp extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 47,
                     fontWeight: FontWeight.bold,
-                    color: Colors.lightBlueAccent,
+                    color: Colors.teal,
                   ),
                 ),
               ),
@@ -111,7 +111,8 @@ class SignUp extends StatelessWidget {
                       if (success) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Signup Successful'),
+                            duration: Duration(seconds: 2),
+                            content: Center(child: Text('Signup Successful')),
                             backgroundColor: Colors.green,
                           ),
                         );
@@ -124,7 +125,8 @@ class SignUp extends StatelessWidget {
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Invalid email or password'),
+                            duration: Duration(seconds: 2),
+                            content: Center(child: Text('Invalid email or password')),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -134,7 +136,13 @@ class SignUp extends StatelessWidget {
                   child: Consumer<AuthProvider>(
                     builder: (context, value, child) => value.isLoading
                         ? CircularProgressIndicator()
-                        : const Text("Sign up"),
+                        : const Text(
+                            "Sign up",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                   ),
                 ),
               ),
@@ -150,7 +158,7 @@ class SignUp extends StatelessWidget {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.teal,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

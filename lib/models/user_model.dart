@@ -7,7 +7,7 @@ class UserModel {
   factory UserModel.fromJson({required Map<String, dynamic> json}) {
     return UserModel(
       message: json['message'],
-      customerId: json['customerId'],
+      customerId: json['userId'],
     );
   }
 }

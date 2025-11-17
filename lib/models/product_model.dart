@@ -27,7 +27,7 @@ class Products {
         name: product['name'],
         price: product['price'],
         description: product['description'],
-        image: product['image'],
+        image: product['imagePath'],
         id: product['id'],
       );
     }).toList();

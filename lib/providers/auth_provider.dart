@@ -12,7 +12,7 @@ class AuthProvider extends ChangeNotifier {
     user = await AuthService.login(email: email, password: password);
     isLoading = false;
     notifyListeners();
-    return user != null ? true : false;
+    return user != null && user?.customerId != -1 ? true : false;
   }
 
   Future<bool> register({
@@ -31,6 +31,6 @@ class AuthProvider extends ChangeNotifier {
     );
     isLoading = false;
     notifyListeners();
-    return user != null ? true : false;
+    return user != null && user?.customerId != -1 ? true : false;
   }
 }

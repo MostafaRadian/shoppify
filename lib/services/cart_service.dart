@@ -41,7 +41,7 @@ class CartService {
   }) async {
     try {
       Response response = await dio.delete(
-        "https://ecommerceflutter.runasp.net/api/Cart/$userId/remove-product",
+        "https://ecommerceflutter2.runasp.net/api/Cart/$userId/remove-product",
         data: {"productId": productId},
       );
       return response.data["message"];

@@ -32,6 +32,7 @@ class HomePage extends StatelessWidget {
           builder: (context, value, child) {
             final products = value.model?.products;
             if (products == null) {
+              value.getProducts();
               return Center(child: RefreshProgressIndicator());
             } else {
               return Padding(

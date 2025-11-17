@@ -18,16 +18,22 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text("Login", style: TextStyle(fontSize: 24)),
-        ),
-        leading: const Icon(Icons.menu),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(Icons.settings),
+        centerTitle: true,
+        title: Text(
+          "Login",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.teal,
           ),
-        ],
+        ),
+        //leading: const Icon(Icons.menu,color: Colors.teal,),
+        // actions: const [
+        //   Padding(
+        //     padding: EdgeInsets.only(right: 10),
+        //     child: Icon(Icons.settings,color: Colors.teal,),
+        //   ),
+        // ],
       ),
       body: Form(
         key: formKey,
@@ -35,12 +41,18 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CircleAvatar(
-              radius: 95,
-              backgroundColor: Colors.black87,
+              radius: 93,
+              backgroundColor: Colors.teal,
               child: CircleAvatar(
                 radius: 90,
-                backgroundImage: NetworkImage(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvDn1PUP13e4E98krHNV-2WLJRHP4dLenxWIgBizm9pREUSDuR8Z0bIrNbSGAVBQPr4_8&usqp=CAU",
+                foregroundColor: Colors.teal,
+                backgroundColor: Colors.white,
+                child: Center(
+                  child: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: Colors.teal,
+                    size: 100,
+                  ),
                 ),
               ),
             ),
@@ -50,6 +62,14 @@ class LoginPage extends StatelessWidget {
               controller: emailController,
               labelText: "Email",
               icon: Icons.email,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter an Email';
+                } else if (!value.contains('@gmail.com')) {
+                  return 'Email must be a Gmail address';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 10),
             // Use the CustomTextField widget for password
@@ -71,14 +91,11 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               width: 150,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                ),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
                 onPressed: () async {
                   if (formKey.currentState!.validate()) {
                     final email = emailController.text.trim();
                     final password = passwordController.text;
-
                     final authProvider = context.read<AuthProvider>();
                     final success = await authProvider.login(
                       email: email,
@@ -86,26 +103,32 @@ class LoginPage extends StatelessWidget {
                     );
 
                     if (success) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Login Successful',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          backgroundColor: Colors.teal,
-                        ),
-                      );
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Placeholder()),
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 2),
+                          content: Center(
+                            child: Text(
+                              'Login Successful',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          backgroundColor: Colors.green,
+                        ),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Invalid email or password'),
+                          duration: Duration(seconds: 2),
+                          content: Center(
+                            child: Text('Invalid email or password'),
+                          ),
                           backgroundColor: Colors.red,
                         ),
                       );
@@ -115,7 +138,13 @@ class LoginPage extends StatelessWidget {
                 child: Consumer<AuthProvider>(
                   builder: (context, value, child) => value.isLoading
                       ? CircularProgressIndicator()
-                      : const Text("Login"),
+                      : const Text(
+                          "Login",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                 ),
               ),
             ),
@@ -134,7 +163,7 @@ class LoginPage extends StatelessWidget {
                   child: const Text(
                     "Register",
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.teal,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
