@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:shoppify/providers/auth_provider.dart';
 import 'package:shoppify/providers/cart_provider.dart';
 import 'package:shoppify/providers/product_provider.dart';
-import 'package:shoppify/screens/home_page.dart';
 import 'package:shoppify/screens/login.dart';
 
 void main() {

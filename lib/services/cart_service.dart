@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:shoppify/models/cart_model.dart';
 
-import '../models/product_model.dart';
 
 class CartService {
   static Dio dio = Dio();

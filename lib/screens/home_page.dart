@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoppify/providers/auth_provider.dart';
 
-import '../models/product_model.dart';
 import '../providers/product_provider.dart';
 import '../widgets/product_item.dart';
 import 'cart_page.dart';
