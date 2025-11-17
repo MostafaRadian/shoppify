@@ -6,15 +6,16 @@ class AuthProvider extends ChangeNotifier {
   UserModel? user;
   bool isLoading = false;
 
-  Future<void> login({required String email, required String password}) async {
+  Future<bool> login({required String email, required String password}) async {
     isLoading = true;
     notifyListeners();
     user = await AuthService.login(email: email, password: password);
     isLoading = false;
     notifyListeners();
+    return user != null ? true : false;
   }
 
-  Future<void> register({
+  Future<bool> register({
     required String email,
     required String password,
     required String name,
@@ -30,5 +31,6 @@ class AuthProvider extends ChangeNotifier {
     );
     isLoading = false;
     notifyListeners();
+    return user != null ? true : false;
   }
 }
