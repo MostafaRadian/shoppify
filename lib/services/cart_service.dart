@@ -7,7 +7,7 @@ class CartService {
   static Future<CartModel> getCartById({required int userId}) async {
     try {
       Response response = await dio.get(
-        'https://ecommerceflutter.runasp.net/api/Cart/$userId',
+        "https://ecommerceflutter2.runasp.net/api/Cart/$userId",
       );
       return CartModel.fromJson(json: response.data);
     } on DioException catch (dioError) {
@@ -23,7 +23,7 @@ class CartService {
   }) async {
     try {
       Response response = await dio.post(
-        'https://ecommerceflutter.runasp.net/api/Cart/$userId/add-product',
+        'https://ecommerceflutter2.runasp.net/api/Cart/$userId/add-product',
         data: {"productId": productId},
       );
       return response.data["message"];

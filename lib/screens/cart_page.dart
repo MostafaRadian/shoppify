@@ -77,7 +77,6 @@ class CartPage extends StatelessWidget {
                 },
               ),
             ),
-            Spacer(),
             Container(
               width: double.infinity,
               height: 50,

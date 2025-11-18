@@ -26,22 +26,25 @@ class ProductItem extends StatelessWidget {
           const SizedBox(height: 8),
 
           Consumer<CartProvider>(
-            builder: (context, value, child) => ElevatedButton(
+            builder: (context, value, child) {
+              final cartList = value.cartModel?.cartItems;
+              bool isInCart = cartList?.any((element) => element.id == item.id) ?? false;
+             return ElevatedButton(
               onPressed: () {
-                if (item.added) {
+
+                if (isInCart) {
                   value.removeProductFromCart(userId:userId , productId: item.id);
-                  item.added = false;
                 } else {
-                  item.added = true;
                   value.addProductToCart(userId:userId , productId: item.id);
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: item.added ? Colors.redAccent : Colors.teal,
+                backgroundColor: isInCart ? Colors.redAccent : Colors.teal,
                 foregroundColor: Colors.white,
               ),
-              child: Text(item.added ? "Added ✓" : "Add to Cart"),
-            ),
+              child: Text(isInCart ? "Added ✓" : "Add to Cart"),
+            );
+            }
           ),
         ],
       ),

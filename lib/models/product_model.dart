@@ -5,7 +5,6 @@ class ProductModel {
   final String description;
   final String image;
   final double price;
-  bool added;
 
   ProductModel({
     required this.name,
@@ -13,7 +12,6 @@ class ProductModel {
     required this.description,
     required this.image,
     required this.id,
-    this.added = false,
   });
 }
 

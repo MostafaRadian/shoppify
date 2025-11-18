@@ -13,12 +13,13 @@ class CartProvider extends ChangeNotifier {
 
   Future<void> addProductToCart({required int userId, required int productId}) async {
     message = await CartService.addProductToCart(userId: userId, productId: productId);
+    await getCartById(userId: userId);
     notifyListeners();
   }
 
   Future<void> removeProductFromCart({required int userId, required int productId}) async {
     message = await CartService.removeProductFromCart(userId: userId, productId: productId);
-    getCartById(userId: userId);
+    await getCartById(userId: userId);
     notifyListeners();
   }
 }
